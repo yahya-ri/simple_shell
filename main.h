@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <unistd.h>
 
-char *read_line(void);
+int read_line(char **line, size_t *n, int stream);
 
+void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 #endif
