@@ -39,7 +39,7 @@ char **str_tok(char *str, const char *delim)
 	char *token = NULL;
 
 	size = word_count(str);
-	table = malloc(sizeof(char) * (size + 1));
+	table = malloc(sizeof(char *) * (size + 1));
 	if (!table)
 	{
 		perror("allocation failed");

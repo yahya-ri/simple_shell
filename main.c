@@ -40,7 +40,7 @@ int main(int ac __attribute__((unused)), char **av)
 			exit(exit_cmd);
 		}
 
-		else if (token[0])
+		if (token[0])
 		{
 			token[0] = path_handler(token[0], av);
 			exit_cmd = cmd_Exec(token);

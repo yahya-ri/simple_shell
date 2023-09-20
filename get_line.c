@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * get_line - read a line for stream file.
+ * read_line - read a line for stream file.
  * @line: buffer allocate string.
  * @n: size of string.
  * @stream: source file.
