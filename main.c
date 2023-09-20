@@ -11,7 +11,7 @@ int main(int ac __attribute__((unused)), char **av)
 {
 	char *buffer;
 	char **token = NULL;
-	int ret = 0;
+	int ret = 0, exit_cmd = 0;
 	size_t size = 0;
 
 	while (1)
@@ -21,7 +21,7 @@ int main(int ac __attribute__((unused)), char **av)
 		if (isatty(STDIN_FILENO))
 			write(1, "#cisfun$ ", 10);
 
-		ret = read_line(&buffer, &size, STDIN_FILENO);
+		ret = getline(&buffer, &size, stdin);
 
 		if (ret > 0 && (buffer[0] == 0 || buffer[0] == '\n'))
 			continue;
@@ -29,7 +29,7 @@ int main(int ac __attribute__((unused)), char **av)
 		else if (ret == -1 || _strcmp(buffer, "exit\n") == 0)
 		{
 			free(buffer);
-			exit(1);
+			exit(exit_cmd);
 		}
 
 		token = str_tok(buffer, " \t\n");
@@ -37,14 +37,13 @@ int main(int ac __attribute__((unused)), char **av)
 		if (!token)
 		{
 			free(buffer);
-			free(token);
-			exit(1);
+			exit(exit_cmd);
 		}
 
 		else if (token[0])
 		{
-			token[0] = path_handler(token[0]);
-			cmd_Exec(token, av);
+			token[0] = path_handler(token[0], av);
+			exit_cmd = cmd_Exec(token);
 		}
 		free(buffer);
 		free(token);
