@@ -1,21 +1,18 @@
 #include "main.h"
-#include <stddef.h>
 
 /**
- * read_line - read line for stdin
+ * get_line - read a line for stream file.
  * @line: buffer allocate string.
  * @n: size of string.
  * @stream: source file.
- *
- * Description: function that reads an entire line from stream.
- * Return: Always string  or -1.
+ * Return: string or -1.
  */
 
-int read_line(char **line, size_t *n, int stream)
+size_t read_line(char **line, size_t *n, int stream)
 {
-	char *buf = NULL;
-	size_t i;
+	char *buf;
 	int res;
+	size_t i;
 
 	i = 0;
 	if (!*line || !*n)

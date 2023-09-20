@@ -1,13 +1,11 @@
 #include "main.h"
 
 /**
- * _realloc - realloc func.
- * @ptr: memory targeted
- * @old_size: old memo size.
- * @new_size: new memo size.
- *
- * Description:function that reallocates a memory block using malloc and free
- * Return: the pointer to the newly created array
+ * _realloc - reallocate a block of memory
+ * @ptr: memory targeted.
+ * @old_size: old size of momory.
+ * @new_size: size that will be allocated.
+ * Return: pointer to the newly created array.
  */
 
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
