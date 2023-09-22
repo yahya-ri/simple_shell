@@ -1,5 +1,26 @@
 #include "main.h"
-#include <stdio.h>
+/**
+ * env_handler - envirement variable.
+ * @buffer: buffer to free in case.
+ * @token: table has env variable.
+ *
+ */
+
+void env_handler(char *buffer, char **token)
+{
+	unsigned int i;
+
+	i = -1;
+	free(buffer);
+	free(token);
+	while (environ[++i])
+	{
+		write(1, environ[i], _strlen(environ[i]));
+		write(1, "\n", 1);
+	}
+}
+
+
 /**
  * _getenv - get value of env.
  * @name: name of env.
@@ -46,7 +67,7 @@ char *_getenv(const char *name)
 void print_error(char **av, char *cmd)
 {
 	write(2, av[0], _strlen(av[0]));
-	write(2, ": 1:", 5);
+	write(2, ": 1: ", 5);
 	write(2, cmd, _strlen(cmd));
 	write(2, ": not found\n", 12);
 }
@@ -87,7 +108,9 @@ char *path_handler(char *command, char **av)
 		if (stat(full_command, &st) == 0)
 		{
 			free(tmp);
-			return (full_command);
+			command = full_command;
+			free(full_command);
+			return (command);
 		}
 		free(full_command);
 		full_command = NULL;
