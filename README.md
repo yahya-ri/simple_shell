@@ -1,13 +1,9 @@
 # SIMPLE SHELL
-Simple is a simple command line prompt. This shell was built as a project for ALX School.
+Simple Shell is a simple command line prompt was built for the `0x16. C - Simple Shell` project at ALX School.
 
 ## Compilation
 The simple shell should be compiled using GCC compiler with `gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh`
-
-## Example of how to launch the shell after compiling:
-`./hsh`
-
-* Output: prompt to terminal: `cisfun$ `
+After it is done compiling you can run the executable `hsh`
 
 ### List of useful commands
 * `cat` - prints and concatenates files to the standard output
