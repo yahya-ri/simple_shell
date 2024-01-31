@@ -27,7 +27,7 @@ int main(int ac __attribute__((unused)), char **av)
 			free(buffer);
 			exit(exit_cmd);
 		}
-		token = str_tok(buffer, " \t\n");
+		token = _strtok(buffer, " \t\n");
 
 		if (_strcmp(buffer, "env") == 0)
 		{

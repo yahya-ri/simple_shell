@@ -31,7 +31,7 @@ int word_count(char *str)
  * Return: array or NULL.
  */
 
-char **str_tok(char *str, const char *delim)
+char **_strtok(char *str, const char *delim)
 {
 	char **table = NULL;
 	int i = 0;
