@@ -42,7 +42,6 @@ int main(void)
 			exit_cmd = cmd_Exec(token);
 		}
 		free(buffer);
-		free(token[0]);
 		free(token);
 	}
 	return (exit_cmd);
