@@ -40,9 +40,9 @@ int main(void)
 		{
 			token[0] = path_handler(token[0]);
 			exit_cmd = cmd_Exec(token);
-			free(token[0]);
 		}
 		free(buffer);
+		free(token[0]);
 		free(token);
 	}
 	return (exit_cmd);
