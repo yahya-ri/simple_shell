@@ -25,7 +25,7 @@ int word_count(char *str)
 }
 
 /**
- * str_tok - tokenize a string based on a deli.
+ * _strtok - tokenize a string based on a deli.
  * @str: input string.
  * @delim: deli used for tokenization.
  * Return: array or NULL.

@@ -2,11 +2,9 @@
 
 /**
  * main - UNIX command line interpreter.
- * @ac: argument count.
- * @av: vector argument.
  * Return: 1 or 0;
  */
-int main(int ac __attribute__((unused)), char **av)
+int main(void)
 {
 	char *buffer;
 	char **token = NULL;
@@ -25,7 +23,7 @@ int main(int ac __attribute__((unused)), char **av)
 		else if (ret == -1 || _strcmp(buffer, "exit\n") == 0)
 		{
 			free(buffer);
-			exit(exit_cmd);
+			break;
 		}
 		token = _strtok(buffer, " \t\n");
 
@@ -41,11 +39,11 @@ int main(int ac __attribute__((unused)), char **av)
 		}
 		if (token[0])
 		{
-			token[0] = path_handler(token[0], av);
+			token[0] = path_handler(token[0]);
 			exit_cmd = cmd_Exec(token);
 		}
 		free(buffer);
 		free(token);
 	}
-	return (0);
+	return (exit_cmd);
 }

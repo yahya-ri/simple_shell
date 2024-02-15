@@ -74,52 +74,50 @@ void print_error(char **av, char *cmd)
 /**
  * path_handler - check if a command file exist or not.
  * @command:command name.
- * @av:programme name.
  *
  * Return: Always string of command full path or NULL
  */
-char *path_handler(char *command, char **av)
+char *path_handler(char *command)
 {
-	char *tmp = NULL;
-	char *tkn = NULL;
-	char *full_command = NULL;
-	char *path = NULL;
-	struct stat st;
+	char *path;
+	char *tkn, *tmp, *full_command = NULL;
 
-	if (stat(command, &st) == 0)
-	{
-		return (command);
-	}
 	path = _getenv("PATH");
-	tmp = _strdup(path);
-	tkn = strtok(tmp, ":");
-	while (tkn)
+	if (path == NULL || *path == '\0')
 	{
-		full_command = malloc(_strlen(tkn) + 1 + _strlen(command) + 1);
-		if (!full_command)
+		if (access(command, X_OK) == 0)
+			return (command);
+		else
+			return (NULL);
+	}
+	tmp = _strdup(path);
+	if (tmp == NULL)
+		return (NULL);
+
+	tkn = strtok(tmp, ":");
+	while (tkn != NULL)
+	{
+		size_t full_commandLen = _strlen(tkn) + _strlen(command) + 2;
+
+		full_command = malloc(full_commandLen);
+
+		if (full_command == NULL)
 		{
 			free(tmp);
 			return (NULL);
 		}
-		_strcpy(full_command, tkn);
-		_strcat(full_command, "/");
-		_strcat(full_command, command);
+		sprintf(full_command, "%s/%s", tkn, command);
 
-		if (stat(full_command, &st) == 0)
+		if (access(full_command, X_OK) == 0)
 		{
 			free(tmp);
-			command = full_command;
-			free(full_command);
-			return (command);
+			return (full_command);
 		}
 		free(full_command);
-		full_command = NULL;
 		tkn = strtok(NULL, ":");
 	}
 	free(tmp);
-	if (!full_command)
-		print_error(av, command);
-	return (NULL);
+	return (command);
 }
 
 /**
@@ -134,13 +132,14 @@ int cmd_Exec(char **token)
 	pid_t pid;
 	int stat;
 
+	stat = 0;
 	if (!token[0])
 		return (127);
 	pid = fork();
 	if (pid == 0)
 	{
 		execve(token[0], token, environ);
-		exit(1);
+		return (0);
 	}
 	else
 	{
