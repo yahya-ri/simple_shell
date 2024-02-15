@@ -26,7 +26,6 @@ int main(void)
 			break;
 		}
 		token = _strtok(buffer, " \t\n");
-
 		if (_strcmp(buffer, "env") == 0)
 		{
 			env_handler(buffer, token);
@@ -41,6 +40,7 @@ int main(void)
 		{
 			token[0] = path_handler(token[0]);
 			exit_cmd = cmd_Exec(token);
+			free(token[0]);
 		}
 		free(buffer);
 		free(token);
